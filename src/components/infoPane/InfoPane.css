@@ -1,0 +1,17 @@
+#selector-wrapper {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  width: 20%;
+  min-height: 200px;
+  background-color: #FFF;
+  box-shadow: 0 10px 40px 0 rgba(18,106,211,.07), 0 2px 9px 0 rgba(18,106,211,.06);
+}
+
+select#country-selector {
+  /* padding: 20px; */
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #E1E1E1;
+  box-shadow: none;
+}

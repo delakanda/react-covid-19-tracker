@@ -1,0 +1,1 @@
+export const COVID_SUMMARY_SUFFIX = "COVID_SUMMARY";
