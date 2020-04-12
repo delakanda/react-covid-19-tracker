@@ -8,23 +8,23 @@ type TCovidTableProps = {
 
 function CovidTable(props: TCovidTableProps) {
   return (
-    <table className="table table-striped">
+    <table className="table">
       <tbody>
         <tr>
-          <th>Confirmed</th>
-          <th>{formatNum(props.covidSummaryData?.total_cases) || "--"}</th>
+          <th className="text-info">Confirmed</th>
+          <th className="text-info">{formatNum(props.covidSummaryData?.total_cases) || "--"}</th>
         </tr>
         <tr>
-          <th>Active Cases</th>
-          <th>{formatNum(props.covidSummaryData?.active_cases) || "--"}</th>
+          <th className="text-info">Active Cases</th>
+          <th className="text-info">{formatNum(props.covidSummaryData?.active_cases) || "--"}</th>
         </tr>
         <tr>
-          <th>Recoveries</th>
-          <th>{formatNum(props.covidSummaryData?.recovered) || "--"}</th>
+          <th className="text-success">Recoveries</th>
+          <th className="text-success">{formatNum(props.covidSummaryData?.recovered) || "--"}</th>
         </tr>
         <tr>
-          <th>Deaths</th>
-          <th>{formatNum(props.covidSummaryData?.deaths) || "--"}</th>
+          <th className="text-danger">Deaths</th>
+          <th className="text-danger">{formatNum(props.covidSummaryData?.deaths) || "--"}</th>
         </tr>
       </tbody>
     </table>

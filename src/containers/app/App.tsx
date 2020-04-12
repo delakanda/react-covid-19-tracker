@@ -14,7 +14,7 @@ function App() {
     return () => {
       //
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">

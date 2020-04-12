@@ -61,6 +61,11 @@ function GMap(props: any) {
 
           <InfoWindow visible={infoWindowVisible} position={centerLoc}>
             <div>
+              <div className="mb-3">
+                <strong className="font-weight-bolder">
+                  {replaceUnderscores(countrySelection)?.toLocaleUpperCase()}
+                </strong>
+              </div>
               <CovidTable covidSummaryData={covidSummaryData} />
             </div>
           </InfoWindow>

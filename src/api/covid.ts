@@ -26,6 +26,18 @@ export function getCovidSummary() {
         countriesData.push(data.regions[countryKey]);
       });
 
+      countriesData.sort((a,b) => {
+        if(a.name > b.name) {
+          return 1;
+        }
+
+        if(a.name < b.name) {
+          return -1;
+        }
+
+        return 0;
+      });
+
       const reduxData: object = {
         summary :summaryData,
         covidCountriesData: countriesData,
