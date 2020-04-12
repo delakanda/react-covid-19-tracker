@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component Very Snapshot 1`] = `
+<table
+  className="table"
+>
+  <tbody>
+    <tr>
+      <th
+        className="text-info"
+      >
+        Confirmed
+      </th>
+      <th
+        className="text-info"
+      >
+        100
+      </th>
+    </tr>
+    <tr>
+      <th
+        className="text-info"
+      >
+        Active Cases
+      </th>
+      <th
+        className="text-info"
+      >
+        100
+      </th>
+    </tr>
+    <tr>
+      <th
+        className="text-success"
+      >
+        Recoveries
+      </th>
+      <th
+        className="text-success"
+      >
+        100
+      </th>
+    </tr>
+    <tr>
+      <th
+        className="text-danger"
+      >
+        Deaths
+      </th>
+      <th
+        className="text-danger"
+      >
+        100
+      </th>
+    </tr>
+  </tbody>
+</table>
+`;
