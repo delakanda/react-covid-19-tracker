@@ -6,7 +6,8 @@ import { COVID_SUMMARY_SUFFIX } from "../actionTypes/CovidActionTypes";
 const initialState: TCovidReducer = {
   fetchState: FetchState.FetchNeutral,
   covidSummaryData: null,
-  covidCountriesData: []
+  covidCountriesData: [],
+  last_updated: null
 }
 
 export default function covidData(state=initialState, payload: TReducerPayload) {
@@ -14,7 +15,11 @@ export default function covidData(state=initialState, payload: TReducerPayload) 
     case getFetchingActionType(COVID_SUMMARY_SUFFIX):
       return {...state, fetchState: FetchState.Fetching}
     case getFetchedActionType(COVID_SUMMARY_SUFFIX):
-      return {...state, fetchState: FetchState.Fetched, covidSummaryData: payload.payload}
+      return {
+        ...state, 
+        fetchState: FetchState.Fetched, 
+        covidSummaryData: payload.data.summary
+      }
     case getFetchErrorActionType(COVID_SUMMARY_SUFFIX):
       return {...state, fetchState: FetchState.FetchError}
     default:

@@ -14,7 +14,7 @@ export const getFetchingAction = (type: string): TReducerPayload => {
 export const getFetchedAction = (type: string, data: any): TReducerPayload => {
   return {
     type: getFetchedActionType(type),
-    payload: data
+    data
   };
 }
 

@@ -13,5 +13,5 @@ export type TReduxReducers = {
 
 export type TReducerPayload = {
   type: string;
-  payload?: any
+  data?: any
 };
