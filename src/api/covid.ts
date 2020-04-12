@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import makeRequest from "./../service/Axios";
-import { ICovidSummaryData } from "../types/CovidTypes";
+import { ICovidSummaryData, ICovidCountryData } from "../types/CovidTypes";
 import { getFetchedAction, getFetchingAction, getFetchErrorAction } from "../redux/actions/DefaultActions";
 import { COVID_SUMMARY_SUFFIX } from "../redux/actionTypes/CovidActionTypes";
 
@@ -13,14 +13,26 @@ export function getCovidSummary() {
       url: summaryUrl,
       method: "GET"
     }).then((data) => {
+      // GEt summary data
       const summaryData = data.summary as ICovidSummaryData;
 
+      // get date for last_updated
+      let date = new Date(data.generated_on * 1000).toString();
+
+      // Get countries data
+      let countriesData: ICovidCountryData[] = [];
+      const apiCountriesDataKeys = Object.keys(data.regions);
+      apiCountriesDataKeys.forEach((countryKey) => {
+        countriesData.push(data.regions[countryKey]);
+      });
+
       const reduxData: object = {
-        summary :summaryData
+        summary :summaryData,
+        covidCountriesData: countriesData,
+        lastUpdated: date
       }
-      
+
       // const 
-      console.log(data);
       dispatch(getFetchedAction((COVID_SUMMARY_SUFFIX), reduxData));
     }).catch((err) => {
       console.log(err);

@@ -1,10 +1,12 @@
 import { FetchState } from "./Default";
 
 export type TCovidReducer = {
+  countrySelection: string;
   fetchState: FetchState;
+  immutableCovidSummaryData: ICovidSummaryData | null;
   covidSummaryData: ICovidSummaryData | null;
   covidCountriesData: ICovidCountryData[];
-  last_updated: string | null;
+  lastUpdated: string | null;
 };
 
 export interface ICovidSummaryData {

@@ -1,7 +1,7 @@
 import { 
   getFetchErrorActionType, 
   getFetchingActionType, 
-  getFetchedActionType 
+  getFetchedActionType,
 } from "../actionTypes/DefaultTypes";
 import { TReducerPayload } from "../../types/Default";
 

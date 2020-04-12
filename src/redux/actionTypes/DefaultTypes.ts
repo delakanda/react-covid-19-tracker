@@ -1,9 +1,10 @@
 export const FETCHING = "FETCHING_";
 export const FETCHED = "FETCHED_";
 export const FETCH_ERROR = "FETCHING_";
+export const COUNTRY_SELECT = "COUNTRY_SELECT";
+export const UPDATE_SUMMARY_DATA = "UPDATE_SUMMARY_DATA";
 
 export const getFetchingActionType = (type: string) => {
-  console.log(type);
   return `${FETCHING}${type}`;
 }
 
