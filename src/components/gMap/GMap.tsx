@@ -1,37 +1,45 @@
 import React, { useState, useEffect } from "react";
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 import "./GMap.css";
 import { GOOGLE_API_KEY } from "../../utils/GMap_Env";
 import { useSelector } from "react-redux";
 import { TReduxReducers } from "../../types/Default";
 import { replaceUnderscores } from "../../utils/StringUtil";
+import CovidTable from "../covidTable/CovidTable";
+
+const DEFAULT_ZOOM: number = 3;
+const SELECTED_ZOOM: number = 6;
 
 function GMap(props: any) {
 
   const { 
-    countrySelection
+    countrySelection,
+    covidSummaryData
   } = useSelector((state: TReduxReducers) => state.covidReducer);
 
   const [centerLoc, setCenterLoc] = useState(undefined);
-  const [zoom, setZoom] = useState<number>(3);
-  const [activeMarker, setActiveMarker] = useState({});
+  const [zoom, setZoom] = useState<number>(DEFAULT_ZOOM);
+  const [infoWindowVisible, setInfoWindowVisible] = useState<boolean>(false);
 
   useEffect(() => {
     if(countrySelection) {
       const geocoder = new props.google.maps.Geocoder();
       geocoder.geocode( {'address' : replaceUnderscores(countrySelection)}, function(results: any, status: any) {
-        if (status == google.maps.GeocoderStatus.OK) {
+        if (status === google.maps.GeocoderStatus.OK) {
           console.log(results[0]);
           setCenterLoc(results[0].geometry.location);
-          setZoom(6);
+          setZoom(SELECTED_ZOOM);
+          setInfoWindowVisible(true);
         } else {
           setCenterLoc(undefined);
-          setZoom(3);
+          setZoom(DEFAULT_ZOOM);
+          setInfoWindowVisible(false);
         }
       });
     } else {
       setCenterLoc(undefined);
-      setZoom(3);
+      setZoom(DEFAULT_ZOOM);
+      setInfoWindowVisible(false);
     }
   }, [countrySelection, props.google.maps]);
 
@@ -44,11 +52,18 @@ function GMap(props: any) {
         initialCenter={{lat: 6.735496, lng: -0.012123}}
         center={centerLoc || {lat: 6.735496, lng: -0.012123}}>
 
-            <InfoWindow>
-              <div>
-                <h1>HERE</h1>
-              </div>
-            </InfoWindow>
+            {/* {countrySelection &&
+              <Marker
+                title={replaceUnderscores(countrySelection)?.toLocaleUpperCase()}
+                name={countrySelection}
+                position={centerLoc} />
+            } */}
+
+          <InfoWindow visible={infoWindowVisible} position={centerLoc}>
+            <div>
+              <CovidTable covidSummaryData={covidSummaryData} />
+            </div>
+          </InfoWindow>
         
       </Map>
     </div>

@@ -2,10 +2,10 @@ import React, { useCallback } from "react";
 import "./InfoPane.css";
 import { useSelector, useDispatch } from "react-redux";
 import { TReduxReducers, FetchState } from "../../types/Default";
-import { formatNum } from "../../utils/NumberUtil";
 import { replaceUnderscores } from "../../utils/StringUtil";
 import { ICovidSummaryData } from "../../types/CovidTypes";
 import { getUpdateSummaryDataAction, getCountrySelectionAction } from "../../redux/actions/CovidActions";
+import CovidTable from "../covidTable/CovidTable";
 
 function InfoPane() {
 
@@ -70,26 +70,7 @@ function InfoPane() {
           }
           {fetchState === FetchState.Fetched &&
             <React.Fragment>
-              <table className="table table-striped">
-                <tbody>
-                  <tr>
-                    <th>Confirmed</th>
-                    <th>{formatNum(covidSummaryData?.total_cases) || "--"}</th>
-                  </tr>
-                  <tr>
-                    <th>Active Cases</th>
-                    <th>{formatNum(covidSummaryData?.active_cases) || "--"}</th>
-                  </tr>
-                  <tr>
-                    <th>Recoveries</th>
-                    <th>{formatNum(covidSummaryData?.recovered) || "--"}</th>
-                  </tr>
-                  <tr>
-                    <th>Deaths</th>
-                    <th>{formatNum(covidSummaryData?.deaths) || "--"}</th>
-                  </tr>
-                </tbody>
-              </table>
+              <CovidTable covidSummaryData={covidSummaryData} />
 
               <div className="mt-3">
                 <small><strong>Last Updated:</strong> <br/> {lastUpdated}</small>
