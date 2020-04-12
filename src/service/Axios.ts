@@ -1,5 +1,5 @@
 import AxiosClient, { AxiosRequestConfig } from "axios";
-import { RAPID_API_BASE_URL } from "../utils/RapidApi";
+import { RAPID_API_BASE_URL, X_RAPID_API_KEY, X_RAPID_API_HOST } from "../utils/RapidApi_Env";
 import { AxiosCallParams } from "../types/AxiosTypes";
 
 export default (params: AxiosCallParams) => {
@@ -9,8 +9,8 @@ export default (params: AxiosCallParams) => {
     params: params.params,
     headers: {
       Accept: "application/json",
-      "x-rapidapi-host": "coronavirus-map.p.rapidapi.com",
-	    "x-rapidapi-key": "05da87b23cmsh80bdf4169daf8e6p16db8ajsn8d7b83802d1c",
+      "x-rapidapi-host": X_RAPID_API_HOST,
+	    "x-rapidapi-key": X_RAPID_API_KEY,
       ...params.headers
     },
     url: params.url,

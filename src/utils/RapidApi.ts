@@ -1,1 +1,0 @@
-export const RAPID_API_BASE_URL = "https://coronavirus-map.p.rapidapi.com/v1/summary/latest";
