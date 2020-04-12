@@ -14,19 +14,26 @@ function GMap(props: any) {
 
   const [centerLoc, setCenterLoc] = useState(undefined);
   const [zoom, setZoom] = useState<number>(3);
+  const [activeMarker, setActiveMarker] = useState({});
 
   useEffect(() => {
     if(countrySelection) {
       const geocoder = new props.google.maps.Geocoder();
       geocoder.geocode( {'address' : replaceUnderscores(countrySelection)}, function(results: any, status: any) {
         if (status == google.maps.GeocoderStatus.OK) {
+          console.log(results[0]);
           setCenterLoc(results[0].geometry.location);
           setZoom(6);
-          // console.log(results, status);
+        } else {
+          setCenterLoc(undefined);
+          setZoom(3);
         }
       });
+    } else {
+      setCenterLoc(undefined);
+      setZoom(3);
     }
-  }, [countrySelection]);
+  }, [countrySelection, props.google.maps]);
 
   return (
     <div data-testid="google-map" id="google-map">
@@ -35,7 +42,14 @@ function GMap(props: any) {
         zoom={zoom} 
         mapTypeControl={false} 
         initialCenter={{lat: 6.735496, lng: -0.012123}}
-        center={centerLoc}>
+        center={centerLoc || {lat: 6.735496, lng: -0.012123}}>
+
+            <InfoWindow>
+              <div>
+                <h1>HERE</h1>
+              </div>
+            </InfoWindow>
+        
       </Map>
     </div>
   );
